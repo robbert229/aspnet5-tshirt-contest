@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using TShirtVoter.Models;
 
 namespace TShirtVoter.Controllers
 {
@@ -10,26 +11,29 @@ namespace TShirtVoter.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Vote");
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
+        public IActionResult Register(){
             return View();
         }
-
-        public IActionResult Contact()
+        
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Register(ContestEntry entry)
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            if(ModelState.IsValid){
+                return RedirectToAction("Vote");    
+            } else {
+                return View(entry);
+            }
         }
-
-        public IActionResult Error()
-        {
-            return View();
+               
+        public IActionResult Vote(){
+            var entries = new List<ContestEntry>();
+            
+            return View(entries);
         }
     }
 }

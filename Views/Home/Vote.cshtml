@@ -1,0 +1,24 @@
+@model List<ContestEntry>
+
+<div>
+	<h1>ACM TShirt Design Contest</h1>
+	<p>This is competition is to design the clubs tshirt for this year. The best design, as determined by our voters is awarded a $50 gift card to amazon.</p>
+</div>
+
+<div>
+	<h2>Entrees</h2>
+	@foreach(var element in Model){
+		<div class="row">
+			<div class="col-md-7">
+				<a href="#">
+					<img class="img-responsive" src="@element.Photo" alt="">
+				</a>
+			</div>
+			<div class="col-md-5">
+				<h3>@element.Name</h3>
+				<p>@element.Description</p>
+				<a class="btn btn-primary" href="#">Vote! <span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+		</div>
+	}
+</div>

@@ -1,0 +1,100 @@
+@model ContestEntry
+
+<h1>Enter To Win Here</h1>
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post, new { role = "form" })){
+
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+	<div class="form-group">
+        <div class="row">
+			@Html.LabelFor(m => m.StudentId, new { @class = "col-md-2 control-label" })
+			
+			<div class="col-md-10">
+                @Html.TextBoxFor(m => m.StudentId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.StudentId, "", new { @class = "text-danger" })
+            </div>
+		</div>	
+	</div>
+	<div class="form-group">
+        <div class="row">
+			@Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+			
+			<div class="col-md-10">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+		</div>	
+	</div>
+	<div class="form-group">
+        <div class="row">
+			@Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+			
+			<div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+		</div>	
+	</div>
+	<div class="form-group">
+        <div class="row">
+			@Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+			
+			<div class="col-md-10">
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+            </div>
+		</div>	
+	</div>
+	
+	<div class="form-group">
+		<div class="row">
+			<input type="file" class="form-control"/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-2">
+				<input type="submit" value="Log in" class="btn btn-primary" />
+			</div>
+		</div>
+	</div>
+	
+	<input name="Photo" style="display:none;"/>
+}
+
+
+@section scripts {
+	<script>
+	//Author James Harrington 2014
+	function base64(file, callback){
+		var coolFile = {};
+		function readerOnload(e){
+			var base64 = btoa(e.target.result);
+			coolFile.base64 = base64;
+			callback(coolFile);
+		};
+	
+		var reader = new FileReader();
+		reader.onload = readerOnload;
+		
+		var file = file[0].files[0];
+		coolFile.filetype = file.type;
+		coolFile.size = file.size;
+		coolFile.filename = file.name;
+		reader.readAsBinaryString(file);
+	}
+	
+	function update_file(){				
+		base64( $('input[type="file"]'), function(data){
+			$("input[name='Photo']").val(data.base64);
+		});
+	}
+	
+	$("input[type='file']").on("change", function(o){
+		update_file();
+	});
+	</script>
+}	
