@@ -1,24 +1,52 @@
-@model List<ContestEntry>
+@model TShirtVoter.Models.ContestVote
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>Vote</h2>
+
+<form asp-action="View">
+    <div class="form-horizontal">
+        <h4>ContestVote</h4>
+        <hr />
+        
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div class="form-group" style="display: none;">
+            <input name="EntryId" class="form-control" value="@(ViewBag.EntryId)"/>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.StudentId, new { @class = "col-md-2 control-label" })
+
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.StudentId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.StudentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
 
 <div>
-	<h1>ACM TShirt Design Contest</h1>
-	<p>This is competition is to design the clubs tshirt for this year. The best design, as determined by our voters is awarded a $50 gift card to amazon.</p>
+    <a asp-action="Index">Back to List</a>
 </div>
 
-<div>
-	<h2>Entrees</h2>
-	@foreach(var element in Model){
-		<div class="row">
-			<div class="col-md-7">
-				<a href="#">
-					<img class="img-responsive" src="@element.Photo" alt="">
-				</a>
-			</div>
-			<div class="col-md-5">
-				<h3>@element.Name</h3>
-				<p>@element.Description</p>
-				<a class="btn btn-primary" href="#">Vote! <span class="glyphicon glyphicon-chevron-right"></span></a>
-			</div>
-		</div>
-	}
-</div>
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

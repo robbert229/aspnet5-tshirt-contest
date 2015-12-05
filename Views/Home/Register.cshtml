@@ -57,7 +57,7 @@
 	<div class="form-group">
 		<div class="row">
 			<div class="col-md-offset-2 col-md-2">
-				<input type="submit" value="Log in" class="btn btn-primary" />
+				<input type="submit" value="Register" class="btn btn-primary" />
 			</div>
 		</div>
 	</div>
@@ -65,9 +65,12 @@
 	<input name="Photo" style="display:none;"/>
 }
 
-
-@section scripts {
-	<script>
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    
+    <script>
 	//Author James Harrington 2014
 	function base64(file, callback){
 		var coolFile = {};

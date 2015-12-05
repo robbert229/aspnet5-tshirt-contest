@@ -4,7 +4,10 @@ namespace TShirtVoter.Models
 {
 
     public class ContestEntry {
-		[Required(ErrorMessage = "Please enter your email address")] 
+        [Key]
+        public int EntryId { get; set; }
+
+        [Required(ErrorMessage = "Please enter your email address")] 
  		[DataType(DataType.EmailAddress)]
  		[Display(Name = "Email Address")]
  		[MaxLength(50)]
@@ -12,7 +15,7 @@ namespace TShirtVoter.Models
 		public string Email { get; set; }
 		 
 		[Required]
-		[RegularExpressionAttribute("[a-zA-Z.0-9 ]*")]
+		[RegularExpressionAttribute(@"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$")]
 		public string Photo { get; set; }
 
 		[Required(ErrorMessage = "Please Enter A Valid EWU StudentID")]
@@ -28,7 +31,5 @@ namespace TShirtVoter.Models
 		[Display(Name = "Design Description")]
 		[RegularExpressionAttribute("[a-zA-Z.0-9? ]*", ErrorMessage = "Please Enter A Description Containing . ? And Alphanumeric Characters")]
 		public string Description { get; set; }
-		
-		
 	}
 }

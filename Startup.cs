@@ -32,7 +32,8 @@ namespace TShirtVoter
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-            Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={appEnv.ApplicationBasePath}/TShirtVoter.db";
+            Configuration["Data:DefaultConnection:ApplicationConnectionString"] = $@"Data Source={appEnv.ApplicationBasePath}/Application.db";
+            Configuration["Data:DefaultConnection:ContestConnectionString"] = $@"Data Source={appEnv.ApplicationBasePath}/Contest.db";
 
         }
 
@@ -45,7 +46,9 @@ namespace TShirtVoter
             services.AddEntityFramework()
                 .AddSqlite()
                 .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlite(Configuration["Data:DefaultConnection:ConnectionString"]));
+                    options.UseSqlite(Configuration["Data:DefaultConnection:ApplicationConnectionString"]))
+                .AddDbContext<ContestDbContext>(options =>
+                    options.UseSqlite(Configuration["Data:DefaultConnection:ContestConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -72,7 +75,7 @@ namespace TShirtVoter
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-
+                
                 // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
                 try
                 {

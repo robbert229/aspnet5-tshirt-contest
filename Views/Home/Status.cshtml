@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNet.Mvc.ModelBinding.Validation
+@model ContestStatus
+
+<h1>Winner So Far</h1>
+
+@{
+    var winner = Model.Winner;
+}
+<div class="row">
+    <div class="col-md-7">
+        <a href="#">
+            <img class="img-responsive" src="data:image/jpeg;charset=utf-8;base64,@winner.Photo" alt="">
+        </a>
+    </div>
+    <div class="col-md-5">
+        <h3>@winner.Name</h3>
+        <p>@winner.Description</p>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Student Id</th>
+            <th>Voted For EntryId</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var contestVote in Model.Votes)
+        {
+            <tr>
+                <td>@contestVote.Name</td>
+                <td>@contestVote.StudentId</td>
+                <td>@contestVote.EntryId</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
