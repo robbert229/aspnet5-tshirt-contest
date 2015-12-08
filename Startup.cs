@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Glimpse;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -54,6 +55,8 @@ namespace TShirtVoter
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddGlimpse();
+
             services.AddMvc();
 
             // Add application services.
@@ -66,6 +69,8 @@ namespace TShirtVoter
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseGlimpse();
 
             if (env.IsDevelopment())
             {
