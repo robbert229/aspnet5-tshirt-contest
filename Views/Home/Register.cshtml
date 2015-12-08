@@ -50,7 +50,9 @@
 	
 	<div class="form-group">
 		<div class="row">
-			<input type="file" class="form-control"/>
+		    <input type="file" class="form-control"/>
+		    <input name="Photo" style="display: none;"/>
+            @Html.ValidationMessageFor(m => m.Photo, "", new { @class = "text-danger"})
 		</div>
 	</div>
 	
@@ -61,8 +63,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<input name="Photo" style="display:none;"/>
 }
 
 @section Scripts {

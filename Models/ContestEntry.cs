@@ -15,7 +15,7 @@ namespace TShirtVoter.Models
 		public string Email { get; set; }
 		 
 		[Required]
-		[RegularExpressionAttribute(@"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$")]
+		[RegularExpressionAttribute(@"^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$", ErrorMessage = "Base64 Encoding Error")]
 		public string Photo { get; set; }
 
 		[Required(ErrorMessage = "Please Enter A Valid EWU StudentID")]
